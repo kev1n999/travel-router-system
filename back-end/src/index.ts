@@ -1,15 +1,17 @@
 import "dotenv/config";
-import express from "express";
 import { env } from "./config/env";
-import { router } from "./routes";
+import { app } from "./server";
+import { mongoConnect } from "./database";
 
-const { serverPort } = env;
+const { serverPort, mongoUri } = env;
 if (!serverPort) throw new Error("An error ocurred! You need to add the SERVER_PORT in .env!");
+if (!mongoUri) throw new Error("An error ocurred! You need to add the mongoURI in .env!");
 
-const app = express();
-app.use(express.json());
-app.use(router);
+async function bootstrap() {
+  await mongoConnect(mongoUri);
+  app.listen(serverPort, () => {
+    console.log(`Server listening on: http://localhost:${serverPort}`);
+  })
+}
 
-app.listen(serverPort, () => {
-  console.log(`Server listening on: http://localhost:${serverPort}`);
-})
+bootstrap();
