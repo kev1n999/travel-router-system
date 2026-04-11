@@ -1,12 +1,10 @@
 import { Schema, Document, model } from "mongoose";
+import { TravelSchemaProps } from "../interfaces/travel.interface";
 
-// Model to Travel structure
-interface TravelSchemaProps extends Document {
-  name: string; // travel name
-}
+type travelDocument = TravelSchemaProps & Document;
 
-const travelSchema = new Schema<TravelSchemaProps>({
+const travelSchema = new Schema<travelDocument>({
   name: { type: String, required: true, },
 });
 
-export const travelModel = model<TravelSchemaProps>("Travel", travelSchema);
+export const travelModel = model<travelDocument>("Travel", travelSchema);

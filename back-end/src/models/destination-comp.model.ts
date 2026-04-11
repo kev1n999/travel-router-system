@@ -1,14 +1,9 @@
 import { Schema, Document, model } from "mongoose";
+import { DestinationCompProps } from "../interfaces/destination-comp.interface";
 
-interface DestinationCompProps extends Document {
-  travelId: Schema.Types.ObjectId;
-  destinationXId: Schema.Types.ObjectId;
-  destinationYId: Schema.Types.ObjectId;
-  distance: number;
-  duration: number;
-}
+type DestinationCompDocument = DestinationCompProps & Document;
 
-const destinationCompSchema = new Schema<DestinationCompProps>({
+const destinationCompSchema = new Schema<DestinationCompDocument>({
   travelId: { type: Schema.Types.ObjectId, ref: "Travel", required: true },
   destinationXId: { type: Schema.Types.ObjectId, ref: "Destination", required: true },
   destinationYId: { type: Schema.Types.ObjectId, ref: "Destination", required: true },
@@ -16,4 +11,4 @@ const destinationCompSchema = new Schema<DestinationCompProps>({
   duration: { type: Number, required: true },
 });
 
-export const destinationCompModel = model<DestinationCompProps>("DestinationComp", destinationCompSchema);
+export const destinationCompModel = model<DestinationCompDocument>("DestinationComp", destinationCompSchema);
