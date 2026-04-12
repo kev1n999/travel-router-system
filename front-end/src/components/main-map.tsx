@@ -20,7 +20,7 @@ export default function MainMap() {
     <div className="relative h-screen w-screen">
       <MainContainerMap position={position} label={label} />
 
-      <div className="absolute left-1/2 top-2 z-1000">
+      <div className="absolute left-1/2 z-1000 top-2 opacity-0 transition-all duration-300 hover:opacity-80">
         <DestinationInput value={destinationName} onChange={setDestinationName} onSearch={onSearch}
         />
       </div>

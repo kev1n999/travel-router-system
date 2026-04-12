@@ -24,7 +24,12 @@ export default function MainContainerMap({ position, label }: MapProps) {
       (position && {
         <Marker position={position || [51.505, -0.09]}>
           <Popup>
-            { label || "Destino" }
+            {label || "Destino"}
+            <div className="p-2 relative right-2">
+              <button className="rounded-sm cursor-pointer transition-colors duration-300 hover:bg-blue-500 p-1 bg-blue-400 text-white">
+                Adicionar destino
+              </button>
+            </div>
           </Popup>
         </Marker>
       })
