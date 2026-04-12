@@ -1,9 +1,9 @@
-import MainContainerMap from "./components/leaflet-map";
+import MainMap from "./components/main-map";
 
 export default function App() {
   return (
-    <div className="w-screen h-screen">
-      <MainContainerMap />
+    <div className="relative h-screen w-screen">
+      <MainMap />
     </div>
   )
 }
