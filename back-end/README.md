@@ -4,5 +4,6 @@
 - NodeJS
 - TypeScript
 - ExpressJS
+- Mongoose / MongoDB
 
 # Em desenvolvimento...
