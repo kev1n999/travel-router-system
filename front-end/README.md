@@ -1,4 +1,5 @@
 # Travel Router System - Front-end
+---
 
 ## Problema 
 - Uma pessoa está de férias e iniciou uma viagem, ela está buscando várias cidades e lugares diferentes para visitar. Para isso, ela precisa de uma lista ordenada definindo a prioridade para cada destino, por exemplo:
@@ -14,6 +15,7 @@ Viagem: {
   }
 }
 ```
+---
 
 ## Solução
 > O Travel Router System irá entregar um mapa interativo + input de busca para o usuário selecionar destinos/cidades que ele deseja visitar na viagem, cada destino selecionado vai para a lista de destinos.
