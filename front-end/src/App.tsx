@@ -1,5 +1,9 @@
+import MainContainerMap from "./components/leaflet-map";
+
 export default function App() {
   return (
-    <h1 className="text-green-200">Hello World!</h1>
+    <div className="w-screen h-screen">
+      <MainContainerMap />
+    </div>
   )
 }
