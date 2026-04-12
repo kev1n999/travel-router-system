@@ -1,6 +1,6 @@
 import { constants } from "../config/constants";
 
-type Cordinates = {
+export type Cordinates = {
   latitude: number;
   longitude: number;
   displayName: string;
