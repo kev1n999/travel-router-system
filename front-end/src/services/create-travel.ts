@@ -10,5 +10,5 @@ export async function createTravel(name: string): Promise<string> {
 
   const response = await request.json();
   if (!request.ok) throw new Error(`An error ocurred to create the travel!Result: \n${response}`);
-  return response._id;
+  return response.result._id;
 }
