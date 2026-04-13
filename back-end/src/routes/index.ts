@@ -1,13 +1,20 @@
 import { Router } from "express";
 import { Request, Response } from "express";
-import { createTravelController } from "../controllers/travel.controller";
+import { createTravelController, deleteTravelControler, getTravelController, updateTravelController } from "../controllers/travel.controller";
 
 export const router = Router();
 
 // test route
-router.get("/", (req: Request, res: Response) => {
-  return res.status(200).send("Hello World!");
-});
+router.get("/", (req: Request, res: Response) => res.status(200).send("Hello World!"));
 
-// route to create a new travel by travel name
-router.post("/create-travel", createTravelController);
+// routes to manage the travel
+router.post("/travel", createTravelController);
+router.get("/travel/:id", getTravelController);
+router.put("/travel/:id", updateTravelController);
+router.delete("/travel/:id", deleteTravelControler);
+
+// routes to manage the travel destinations
+// router.get("/travel/:id/destinations");
+// router.post("/travel/:id/destinations");
+// router.patch("/travel/:id/destinations/reorder")
+// router.delete("/travel/:id/destinations/:destinationId");
