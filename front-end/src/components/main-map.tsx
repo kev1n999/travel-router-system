@@ -52,6 +52,10 @@ export default function MainMap() {
     setLabel(result.displayName);
   };
 
+  const deleteHandler = (destinationId: string) => {
+    setDestinations((prev) => prev.filter(d => d._id !== destinationId));
+  };
+
   return (
     <div className="relative h-screen w-screen">
       <MainContainerMap position={position} label={label} createDestinationCallback={createNewDestination} />
@@ -66,7 +70,7 @@ export default function MainMap() {
       )}
       {destinations.length > 0 && (
         <div className="absolute top-0 right-0 h-100 w-80 bg-neutral-800 rounded-xl m-4 opacity-90 backdrop-blur-sm z-1000 shadow-lg p-4 overflow-y-auto">
-          <DestinationList destinations={destinations} />
+          <DestinationList destinations={destinations} travelId={travelId!} onDelete={deleteHandler} />
         </div>
     )}
     </div>
