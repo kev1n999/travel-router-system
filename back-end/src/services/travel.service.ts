@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { TravelSchemaProps } from "../interfaces/travel.interface";
 import { travelModel } from "../models/travel.model";
 
@@ -12,7 +13,7 @@ export async function createTravelService({ name }: TravelSchemaProps) {
 export async function getTravelService(travelId: string) {
   if (!travelId) throw new Error("An error ocurred! The parameter `travelId` is missing.");
   // get the travel by id
-  const travel = await travelModel.findOne({ _id: travelId, });
+  const travel = await travelModel.findOne({ _id: new Types.ObjectId(travelId), });
   if (!travel) throw new Error("Travel not found!");
   return travel;
 }
@@ -21,14 +22,14 @@ export async function getTravelService(travelId: string) {
 export async function updateTravelService(travelId: string, travelName: string) {
   if (!travelId) throw new Error("An error ocurred! The parameter `travelId` is missing.");
   // get the travel by id
-  const travel = await travelModel.findOne({ _id: travelId, });
+  const travel = await travelModel.findOne({ _id: new Types.ObjectId(travelId), });
   if (!travel) throw new Error("Travel not found!");
   return await travelModel.updateOne({ _id: travelId }, { name: travelName, });
 }
 
 export async function deleteTravelSerivce(travelId: string) {
   if (!travelId) throw new Error("An error ocurred! The parameter `travelId` is missing.");
-  const travel = await travelModel.findOne({ _id: travelId, });
+  const travel = await travelModel.findOne({ _id: new Types.ObjectId(travelId), });
   if (!travel) throw new Error("Travel not found!");
   return travelModel.deleteOne({ _id: travelId });
 }

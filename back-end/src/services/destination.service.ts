@@ -8,13 +8,14 @@
 import { DestinationSchemaProps } from "../interfaces/destination.interface";
 import { destinationModel } from "../models/destination.model";
 import { travelModel } from "../models/travel.model";
+import { Types } from "mongoose";
 
 export async function createDestinationService(
   travelId: string,
   latitude: number,
   longitude: number,
 ) {
-  const travel = await travelModel.findOne({ _id: travelId });
+  const travel = await travelModel.findOne({ _id: new Types.ObjectId(travelId) });
   if (!travel) throw new Error("Travel not found!");
 
   const lastDestination = await destinationModel.findOne({travelId: travel._id,}).sort({ order: -1 });
@@ -31,9 +32,9 @@ export async function createDestinationService(
 export async function getDestinationsService(
   travelId: string,
 ): Promise<DestinationSchemaProps[]> {
-  const travel = await travelModel.findOne({ _id: travelId });
+  const travel = await travelModel.findOne({ _id: new Types.ObjectId(travelId) });
   if (!travel) throw new Error("Travel not found!");
-  const destinations = await destinationModel.find({ travelId: travelId });
+  const destinations = await destinationModel.find({ travelId: travel._id });
   if (!destinations) throw new Error("Destinations not found!");
   return destinations;
 }
@@ -42,9 +43,9 @@ export async function deleteDestinationService(
   travelId: string,
   destinationId: string,
 ) {
-  const travel = await travelModel.findOne({ _id: travelId });
+  const travel = await travelModel.findOne({ _id: new Types.ObjectId(travelId) });
   if (!travel) throw new Error("Travel not found!");
-  const destination = await destinationModel.findOne({ _id: destinationId });
+  const destination = await destinationModel.findOne({ _id: new Types.ObjectId(destinationId) });
   if (!destination) throw new Error("Destination not found!");
   return await destinationModel.deleteOne({ _id: destinationId });
 }
