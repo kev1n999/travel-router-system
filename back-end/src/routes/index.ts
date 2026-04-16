@@ -16,6 +16,7 @@ router.delete("/travel/:id", deleteTravelControler);
 
 // routes to manage the travel destinations
 router.get("/travel/:id/destinations", getDestinationsController);
+router.get("/travel/:id/destinations/compare"); 
 router.post("/travel/:id/destinations", createDestinationController);
 // router.patch("/travel/:id/destinations/reorder")
 router.delete("/travel/:id/destinations/:destinationId", deleteDestinationController);

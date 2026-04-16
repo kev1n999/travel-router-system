@@ -4,10 +4,11 @@ import MainContainerMap from "./leaflet-map";
 import DestinationInput from "./destination-input";
 import CreateTravelButton from "./create-travel";
 import CreateTravelForm from "./create-travel-form";
-import { createDestination, deleteDestination } from "../services/destination.service";
+import { createDestination } from "../services/destination.service";
 import type { DestinationDataProps } from "./destination-list";
 import { fetchDestinations } from "../services/destination.service";
 import DestinationList from "./destination-list";
+import CompareDestinations from "./compare-destinations";
 
 export default function MainMap() {
   const [position, setPosition] = useState<[number, number] | null>(null);
@@ -16,6 +17,10 @@ export default function MainMap() {
   const [isShow, setShow] = useState<boolean>(false);
   const [destinations, setDestinations] = useState<DestinationDataProps[]>([]);
   const travelId = localStorage.getItem("travelId");
+  const [latA, setLatA] = useState<string>("");
+  const [lonA, setLonA] = useState<string>(""); 
+  const [latB, setLabB] = useState<string>("");
+  const [lonB, setLonB] = useState<string>("");
 
   useEffect(() => {
     if (!travelId) return;
@@ -51,10 +56,9 @@ export default function MainMap() {
     setLabel(result.displayName);
   };
 
-  const deleteHandler = async (destinationId: string) => {
-    await deleteDestination(travelId, destinationId);
-    const updatedDestinations = await fetchDestinations(travelId);
-    setDestinations(updatedDestinations);
+  const deleteHandler = (destinationId: string) => {
+    setDestinations((prev) => prev.filter(d => d._id !== destinationId));
+    window.location.reload();
   };
 
   return (
@@ -81,6 +85,10 @@ export default function MainMap() {
             onDelete={deleteHandler}
           />
         )}
+      </div>
+
+      <div className="absolute top-0 left-0 h-110 w-80 bg-neutral-800 rounded-xl m-4 opacity-90 backdrop-blur-sm z-1000 shadow-lg p-4 overflow-y-auto">
+        <CompareDestinations />
       </div>
     </div>
   );

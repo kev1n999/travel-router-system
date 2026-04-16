@@ -35,6 +35,23 @@ export async function fetchDestinations(travelId: string): Promise<DestinationDa
   }));
 }
 
+export async function compareDestinations(
+  travelId: string,
+  lat_a: number,
+  lon_a: number,
+  lat_b: number,
+  lon_b: number,
+) {
+  const req = await fetch(
+    `${constants.serverUrl}/travel/${travelId}/compare?lat_a=${lat_a}&lon_a=${lon_a}&lat_b=${lat_b}&lon_b=${lon_b}`
+  );
+
+  const response = await req.json();
+  if (!req.ok) throw new Error(`An error ocurred to compare the destinatioin!\n${response}`); 
+
+  return response;
+}
+
 export async function deleteDestination(travelId: string, destinationId: string) {
   if (!travelId || !destinationId) throw new Error("The travelId and destinationId is required!");
   const req = await fetch(`${constants.serverUrl}/travel/${travelId}/destinations/${destinationId}`, {
