@@ -4,7 +4,7 @@ import MainContainerMap from "./leaflet-map";
 import DestinationInput from "./destination-input";
 import CreateTravelButton from "./create-travel";
 import CreateTravelForm from "./create-travel-form";
-import { createDestination } from "../services/destination.service";
+import { compareDestinations, createDestination } from "../services/destination.service";
 import type { DestinationDataProps } from "./destination-list";
 import { fetchDestinations } from "../services/destination.service";
 import DestinationList from "./destination-list";
@@ -19,8 +19,18 @@ export default function MainMap() {
   const travelId = localStorage.getItem("travelId");
   const [latA, setLatA] = useState<string>("");
   const [lonA, setLonA] = useState<string>(""); 
-  const [latB, setLabB] = useState<string>("");
+  const [latB, setLatB] = useState<string>("");
   const [lonB, setLonB] = useState<string>("");
+
+  const compareCallback = async () => {
+    if (!travelId) return; 
+    try {
+      const result = await compareDestinations(travelId, latA, lonA, latB, lonB);
+      console.log(result);
+    } catch (err) {
+      console.error(err); 
+    }
+  }
 
   useEffect(() => {
     if (!travelId) return;
@@ -88,7 +98,7 @@ export default function MainMap() {
       </div>
 
       <div className="absolute top-0 left-0 h-110 w-80 bg-neutral-800 rounded-xl m-4 opacity-90 backdrop-blur-sm z-1000 shadow-lg p-4 overflow-y-auto">
-        <CompareDestinations />
+        <CompareDestinations latA={latA} lonA={lonA} latB={latB} lonB={lonB} setLatA={setLatA} setLonA={setLonA} setLatB={setLatB} setLonB={setLonB} compareCallback={compareCallback}/>
       </div>
     </div>
   );

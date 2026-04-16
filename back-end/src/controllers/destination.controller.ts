@@ -58,8 +58,8 @@ export async function compareDestinationController(
     "message": "An error ocurred! The travelId is missing."
   });
 
-  const { lat_a, lon_a, lat_b, lon_b } = req.params;
-  if (!lat_a || !lon_a || !lat_b || lon_b) {
+  const { lat_a, lon_a, lat_b, lon_b } = req.query;
+  if (!lat_a || !lon_a || !lat_b || !lon_b) {
     return res.status(400).json({
       "message": "An error ocurred! Missing params: lat_a, lon_a, lat_b, lon_b"
     });
@@ -70,11 +70,17 @@ export async function compareDestinationController(
   const latB = Number(lat_b)
   const lonB = Number(lon_b)
 
-  const result = await compareDestinationService(travelId, latA, lonA, latB, lonB);
-  return res.status(200).json({
-    "distance_km": result.distance_km,
-    "duration_min": result.duration_min,
-  });
+  try {
+    const result = await compareDestinationService(travelId, latA, lonA, latB, lonB);
+    return res.status(200).json({
+      "distance_km": result.distance_km,
+      "duration_min": result.duration_min,
+    });
+  } catch (err: any) {
+    return res.status(500).json({
+      "message": err.message || "An error ocurred! Try again",
+    });
+  }
 }
 
 export async function deleteDestinationController(

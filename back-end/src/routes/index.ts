@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Request, Response } from "express";
 import { createTravelController, deleteTravelControler, getTravelController, updateTravelController } from "../controllers/travel.controller";
-import { createDestinationController, deleteDestinationController, getDestinationsController } from "../controllers/destination.controller";
+import { compareDestinationController, createDestinationController, deleteDestinationController, getDestinationsController } from "../controllers/destination.controller";
 
 export const router = Router();
 
@@ -16,7 +16,7 @@ router.delete("/travel/:id", deleteTravelControler);
 
 // routes to manage the travel destinations
 router.get("/travel/:id/destinations", getDestinationsController);
-router.get("/travel/:id/destinations/compare"); 
+router.get("/travel/:id/destinations/compare", compareDestinationController); 
 router.post("/travel/:id/destinations", createDestinationController);
 // router.patch("/travel/:id/destinations/reorder")
 router.delete("/travel/:id/destinations/:destinationId", deleteDestinationController);

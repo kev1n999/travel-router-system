@@ -50,11 +50,21 @@ export async function compareDestinationService(
   const travel = await travelModel.findById(travelId);
   if (!travel) throw new Error("Travel not found!");
 
-  const req = await fetch(`${env.osrmUrl}${lon_a}, ${lat_a};${lon_b}, ${lat_b}`);
-  if (!req.ok) throw new Error("An error ocurred to get the distance!");
+  const req = await fetch(`${env.osrmUrl}${lon_a},${lat_a};${lon_b},${lat_b}?overview=false`);
+  const response = await req.text();
 
-  const response = await req.json();
-  const route = response.routes[0];
+  let jsonResponse; 
+  try {
+    jsonResponse = JSON.parse(response);
+  } catch (err) {
+    throw new Error("An error ocurred! Try again."); 
+  }
+  
+  if (jsonResponse.code === "NoRoute") throw new Error("No drivable route between these points");
+  if (!req.ok) throw new Error(`An error ocurred to compare the destinations!\n${response}`);
+  if (!jsonResponse.routes) throw new Error("An error ocurred to compare the destinations! Routes not found.");
+  
+  const route = jsonResponse.routes[0];
   
   return {
     distance_km: route.distance / 1000, 

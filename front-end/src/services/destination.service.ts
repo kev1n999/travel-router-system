@@ -37,13 +37,13 @@ export async function fetchDestinations(travelId: string): Promise<DestinationDa
 
 export async function compareDestinations(
   travelId: string,
-  lat_a: number,
-  lon_a: number,
-  lat_b: number,
-  lon_b: number,
+  lat_a: string,
+  lon_a: string,
+  lat_b: string,
+  lon_b: string,
 ) {
   const req = await fetch(
-    `${constants.serverUrl}/travel/${travelId}/compare?lat_a=${lat_a}&lon_a=${lon_a}&lat_b=${lat_b}&lon_b=${lon_b}`
+    `${constants.serverUrl}/travel/${travelId}/destinations/compare?lat_a=${lat_a}&lon_a=${lon_a}&lat_b=${lat_b}&lon_b=${lon_b}`
   );
 
   const response = await req.json();
