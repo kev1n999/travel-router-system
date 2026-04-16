@@ -1,12 +1,12 @@
 import { useState, useEffect} from "react";
-import { searchDestination } from "../services/openstreetmap";
+import { searchDestination } from "../services/openstreetmap.service";
 import MainContainerMap from "./leaflet-map";
 import DestinationInput from "./destination-input";
 import CreateTravelButton from "./create-travel";
 import CreateTravelForm from "./create-travel-form";
-import { createDestination } from "../services/create-destination";
+import { createDestination, deleteDestination } from "../services/destination.service";
 import type { DestinationDataProps } from "./destination-list";
-import { fetchDestinations } from "../services/fetch-destinations";
+import { fetchDestinations } from "../services/destination.service";
 import DestinationList from "./destination-list";
 
 export default function MainMap() {
@@ -37,7 +37,6 @@ export default function MainMap() {
       const result = await searchDestination(destinationName);
       await createDestination(travelId, result.latitude, result.longitude);
       const data = await fetchDestinations(travelId);
-      console.log("FETCH RESULT:", data);
       setDestinations(data);
     } catch (err) {
       console.error(err);
@@ -52,8 +51,10 @@ export default function MainMap() {
     setLabel(result.displayName);
   };
 
-  const deleteHandler = (destinationId: string) => {
-    setDestinations((prev) => prev.filter(d => d._id !== destinationId));
+  const deleteHandler = async (destinationId: string) => {
+    await deleteDestination(travelId, destinationId);
+    const updatedDestinations = await fetchDestinations(travelId);
+    setDestinations(updatedDestinations);
   };
 
   return (

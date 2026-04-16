@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createTravel } from "../services/create-travel";
+import { createTravel } from "../services/travel.service";
 import CreateTravelButton from "./create-travel";
 
 export default function CreateTravelForm({ onClose }: { onClose: () => void; }) {

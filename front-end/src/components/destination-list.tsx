@@ -1,4 +1,4 @@
-import { deleteDestination } from "../services/delete-destination";
+import { deleteDestination } from "../services/destination.service";
 
 export interface DestinationDataProps {
   city: string;
