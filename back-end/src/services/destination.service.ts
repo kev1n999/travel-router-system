@@ -43,9 +43,21 @@ export async function deleteDestinationService(
   travelId: string,
   destinationId: string,
 ) {
-  const travel = await travelModel.findOne({ _id: new Types.ObjectId(travelId) });
+  const travel = await travelModel.findById(travelId);
   if (!travel) throw new Error("Travel not found!");
-  const destination = await destinationModel.findOne({ _id: new Types.ObjectId(destinationId) });
+
+  const destination = await destinationModel.findById(destinationId);
   if (!destination) throw new Error("Destination not found!");
-  return await destinationModel.deleteOne({ _id: destinationId });
+
+  await destinationModel.deleteOne({ _id: destinationId });
+  const remaining = await destinationModel.find({ travelId: new Types.ObjectId(travelId) }).sort({ order: 1 });
+
+  for (let i = 0; i < remaining.length; i++) {
+    await destinationModel.updateOne(
+      { _id: remaining[i]._id },
+      { $set: { order: i + 1 } }
+    );
+  }
+
+  return true;
 }
