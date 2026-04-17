@@ -17,7 +17,7 @@ export default function CreateTravelForm({ onClose }: { onClose: () => void; }) 
       <div className="relative bg-neutral-500 p-6 rounded-xl shadow-lg">
         <form onSubmit={(e) => e.preventDefault()}>
           <h1 className="text-4xl text-white mb-4">Criar viagem</h1>
-          <label className="text-white block mb-1">
+          <label className="text-blue-500 block mb-1">
             Digite o nome da viagem
           </label>
           <input onChange={(i) => setName(i.target.value)} className="w-full border rounded-sm outline-none" />
