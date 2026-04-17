@@ -10,8 +10,8 @@
 ---
 
 # Especificações 
-- > O projeto foi dividido em 2 partes: Front-End e Back-End.
-- > Veja o back-end aqui: [Back-End](https://github.com/kev1n999/travel-router-system/tree/main/back-end)
-- > Veja o front-end aqui: [Front-End](https://github.com/kev1n999/travel-router-system/tree/main/back-end)
+> - O projeto foi dividido em 2 partes: Front-End e Back-End.
+> - Veja o back-end aqui: [Back-End](https://github.com/kev1n999/travel-router-system/tree/main/back-end)
+> - Veja o front-end aqui: [Front-End](https://github.com/kev1n999/travel-router-system/tree/main/back-end)
 ---
 
