@@ -9,6 +9,7 @@ import type { DestinationDataProps } from "./destination-list";
 import { fetchDestinations } from "../services/destination.service";
 import DestinationList from "./destination-list";
 import CompareDestinations from "./compare-destinations";
+import { toast } from "react-hot-toast";
 
 export default function MainMap() {
   const [position, setPosition] = useState<[number, number] | null>(null);
@@ -22,11 +23,23 @@ export default function MainMap() {
   const [latB, setLatB] = useState<string>("");
   const [lonB, setLonB] = useState<string>("");
 
+  const toastError = (message: string) => toast.error(message);
+
   const compareCallback = async () => {
     if (!travelId) return; 
     try {
-      const result = await compareDestinations(travelId, latA, lonA, latB, lonB);
-      console.log(result);
+      if (isNaN(Number(latA)) || isNaN(Number(lonA)) || isNaN(Number(latB)) || isNaN(Number(lonB))) {
+        return toastError("Paramẽtros inválidos!");
+      }
+      if (!travelId || !latA || !lonA || !latB || !lonB) {
+        return toastError("Paramêtros Faltando!");
+      }
+      try {
+        const result = await compareDestinations(travelId, latA, lonA, latB, lonB);
+        toast.success(`Distância: ${result.distance_km}\nTempo de viagem: ${result.duration_min}min`);
+      } catch (err: any) {
+        return toastError(err.message);
+      }
     } catch (err) {
       console.error(err); 
     }

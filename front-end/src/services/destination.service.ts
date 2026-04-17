@@ -47,9 +47,12 @@ export async function compareDestinations(
   );
 
   const response = await req.json();
-  if (!req.ok) throw new Error(`An error ocurred to compare the destinatioin!\n${response}`); 
+  if (!req.ok) throw new Error("Ocorreu um erro ao calcular, tente novamente!");
 
-  return response;
+  return { 
+    distance_km: response.distance_km,
+    duration_min: response.duration_min,
+  }
 }
 
 export async function deleteDestination(travelId: string, destinationId: string) {

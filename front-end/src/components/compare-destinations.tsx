@@ -41,13 +41,13 @@ export default function CompareDestinations({
         <label className="text-white">Destino A</label>
         <input
           value={latA}
-          onChange={(e) => setLatA(e.target.value)}
+          onChange={(e) => setLatA(e.target.value.trim())}
           className="p-1 placeholder:text-neutral-200 rounded-sm border border-blue-400 outline-none text-white"
           placeholder="latitude"
         />
         <input
           value={lonA}
-          onChange={(e) => setLonA(e.target.value)}
+          onChange={(e) => setLonA(e.target.value.trim())}
           className="p-1 placeholder:text-neutral-200 rounded-sm border border-blue-400 outline-none text-white"
           placeholder="longitude"
         />
@@ -57,13 +57,13 @@ export default function CompareDestinations({
         <label className="text-white">Destino B</label>
         <input
           value={latB}
-          onChange={(e) => setLatB(e.target.value)}
+          onChange={(e) => setLatB(e.target.value.trim())}
           className="p-1 placeholder:text-neutral-200 rounded-sm border border-blue-400 outline-none text-white"
           placeholder="latitude"
         />
         <input
           value={lonB}
-          onChange={(e) => setLonB(e.target.value)}
+          onChange={(e) => setLonB(e.target.value.trim())}
           className="p-1 placeholder:text-neutral-200 rounded-sm border border-blue-400 outline-none text-white"
           placeholder="longitude"
         />

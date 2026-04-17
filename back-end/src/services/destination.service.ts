@@ -68,7 +68,7 @@ export async function compareDestinationService(
   
   return {
     distance_km: route.distance / 1000, 
-    duration_min: route.duration / 60, 
+    duration_min: Math.round(route.distance / 60),
   };
 }
 
