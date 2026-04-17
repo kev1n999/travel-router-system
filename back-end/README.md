@@ -1,5 +1,5 @@
 # Servidor do projeto - Travel Router System
-> Projeto para estágio de TI na MMTech
+> Back-end do projeto para estágio de TI na MMTech
 ---
 
 # Stack(Ferramentas Utilizadas)
