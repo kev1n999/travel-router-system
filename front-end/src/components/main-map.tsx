@@ -12,7 +12,7 @@ import CompareDestinations from "./compare-destinations";
 import { toast } from "react-hot-toast";
 
 export default function MainMap() {
-  const [position, setPosition] = useState<[number, number] | null>(null);
+  const [position, setPosition] = useState<[number, number]>([51.505, -0.09]);
   const [label, setLabel] = useState<string>("");
   const [destinationName, setDestinationName] = useState<string>("");
   const [isShow, setShow] = useState<boolean>(false);
