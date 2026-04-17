@@ -1,27 +1,36 @@
-# Travel Router System - Front-end
+# Travel Router System - Front-end 
+> - Front-end do projeto para Estágio na MMTech 
 ---
 
-## Problema 
-- Uma pessoa está de férias e iniciou uma viagem, ela está buscando várias cidades e lugares diferentes para visitar. Para isso, ela precisa de uma lista ordenada definindo a prioridade para cada destino, por exemplo:
-
-```
-Viagem: {
-  Destinos: {
-    1: CidadeA,
-    2: CidadeB,
-    3: CidadeC,
-    4: CidadeD,
-    etc ...
-  }
-}
-```
+# Ferramentas Utilizadas
+- NodeJS
+- TypeScript
+- ReactJS
+- Vite
+- TailwindCSS
+- [LeafLet](https://leafletjs.com/) Para visualização e interação com minimapa(Tipo google-maps)
+- [OSMR](https://project-osrm.org/) Para calcular distância e tempo de viagem entre 2 destinos(Latitude + Longitude)
 ---
 
-## Solução
-> O Travel Router System irá entregar um mapa interativo + input de busca para o usuário selecionar destinos/cidades que ele deseja visitar na viagem, cada destino selecionado vai para a lista de destinos.
-
-> O app deve permitir as seguintes ações pelo usuário:
-
- - Mudar a ordem da lista de destinos conforme o desejado
- - Deletar destinos da lista
- - Visualizar a distância e o tempo de viagem entre um destino A e um destino B
+# Como usar
+1. Clone o repositório
+```
+git clone https://github.com/kev1n999/travel-router-system
+``` 
+2. Acesse a pasta do frontend(front-end)
+```
+cd front-end 
+```
+3. Instale as dependências
+```
+npm install
+```
+4. Crie um .env e defina a seguinte variável 
+```
+// URL do servidor/api  
+VITE_SERVER_URL=http://localhost:8000/api
+```
+5. Rodar e abrir no navegador
+```
+npm run dev
+```  
