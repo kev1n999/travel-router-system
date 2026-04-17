@@ -26,7 +26,7 @@ export async function fetchDestinations(travelId: string): Promise<DestinationDa
   if (!req.ok) throw new Error(response);
 
   const data = response.destinations ?? [];
-  return data.map((destination) => ({
+  return data.map((destination: any) => ({
     city: destination.display_name,
     latitude: destination.latitude,
     longitude: destination.longitude,

@@ -86,7 +86,9 @@ export default function MainMap() {
 
   return (
     <div className="relative h-screen w-screen">
-      <MainContainerMap position={position} label={label} createDestinationCallback={createNewDestination} />
+      {position && (
+        <MainContainerMap position={position} label={label} createDestinationCallback={createNewDestination} />
+      )}
       <div className="absolute flex flex-row gap-1 pt-2.5 left-1/2 -translate-x-1/2 z-1000 top-2 opacity-0 transition-all duration-300 hover:opacity-80">
         <DestinationInput value={destinationName} onChange={setDestinationName} onSearch={onSearch}/>
         <CreateTravelButton onClick={() => setShow(true)} />
